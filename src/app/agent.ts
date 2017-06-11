@@ -10,11 +10,15 @@ export class Agent {
     parryDV: number;
     evasionDV: number;
     soak: number;
+    hardness: number;
     initiative: number;
     hpWPZero: number;
     hpWPOne: number;
     hpWPTwo: number;
     hpWPFour: number;
+
+// do not forget the incapaticated last life
+
     damageLethal: number;
     damageBashing: number;
     damageAggravated: number;
@@ -30,9 +34,9 @@ export class Agent {
     // battlegroup
     static Battlegroup(title: string, description: string,
         drill: Drill, size: number,
-        might: number, basicHP: number, basicSoak: number,
+        might: number, basicHP: number, basicSoak: number, hardness: number,
         evasion: number, parry: number
-        ) {
+        ): Agent {
             const entitity = new Agent();
         entitity.title = title;
         entitity.description = description;
@@ -51,17 +55,18 @@ export class Agent {
         entitity.might = might;
         entitity.size = size;
         entitity.drill = drill;
-        entitity.magnitude = basicHP + size;
+        entitity.magnitude = basicHP + size + 1; // +1 for incapicated
         entitity.active = true;
         entitity.conditions = [];
+        return entitity;
     }
 
 
     // weak individual
-    static WeakIndividual(soak: number, title: string, description: string,
+    static WeakIndividual(soak: number, hardness: number, title: string, description: string,
         hpWPZero: number, hpWPOne: number, hpWPTwo: number, hpWPFour: number,
         evasion: number, parry: number
-        ) {
+        ): Agent {
             const entitity = new Agent();
         entitity.title = title;
         entitity.description = description;
@@ -83,14 +88,15 @@ export class Agent {
         entitity.magnitude = 0;
         entitity.active = true;
         entitity.conditions = [];
+        return entitity;
     }
 
 
     // strong individual
-    static StrongIndividual(soak: number, title: string, description: string,
+    static StrongIndividual(soak: number, hardness: number, title: string, description: string,
         hpWPZero: number, hpWPOne: number, hpWPTwo: number, hpWPFour: number,
         evasion: number, parry: number
-        ) {
+        ): Agent {
             const entitity = new Agent();
         entitity.title = title;
         entitity.description = description;
@@ -112,13 +118,14 @@ export class Agent {
         entitity.magnitude = 0;
         entitity.active = true;
         entitity.conditions = [];
+        return entitity;
     }
 
     // special individual
-    static SpecialIndividual(soak: number, title: string, description: string,
+    static SpecialIndividual(soak: number, hardness: number, title: string, description: string,
         hpWPZero: number, hpWPOne: number, hpWPTwo: number, hpWPFour: number,
         evasion: number, parry: number
-        ) {
+        ): Agent {
             const entitity = new Agent();
         entitity.title = title;
         entitity.description = description;
@@ -140,6 +147,7 @@ export class Agent {
         entitity.magnitude = 0;
         entitity.active = true;
         entitity.conditions = [];
+        return entitity;
     }
 
 
@@ -203,3 +211,16 @@ export class Agent {
         }
     }
 }
+
+
+export const PREMADE_AGENTS: Agent[] = [
+    Agent.Battlegroup('Battlegroup (Battle Ready Troops)',
+        'A standard unit of about 50 soldiers well trained and armed',
+        Drill.Average, 2, 0, 6, 8, 0, 2, 4),
+    Agent.WeakIndividual(6, 0, 'Militia soldier', 'The weakest kind of mortal soldier that is worth tracking.', 1, 2, 2, 1, 2, 2),
+    Agent.StrongIndividual(8, 4, 'Wyvern', 'A Wyvern. Some can be used as mounts', 3, 3, 3, 1, 4, 3),
+    Agent.SpecialIndividual(12, 4, 'Deathclaw', 'You should run now', 3, 5, 5, 4, 4, 6),
+    Agent.SpecialIndividual(14, 7, 'Arete-Series Artificial Hero', 'Sparring partner for Dawn Castes', 10, 0, 0, 0, 6, 7),
+    Agent.SpecialIndividual(16, 10, 'Experienced Dragon-Blood', 'A military directed Dragonblooded of Essence 3 carrying artifact weaponry',
+    1, 7, 7, 1, 0, 5)
+] as Agent[];
