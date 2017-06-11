@@ -13,6 +13,11 @@ Given empty library
     - User removes and existing agent from the library
 
 Given non-empty library
+- Test
+- OtherTest
+
+
+
     - The player creates a Battle
         - A Battle is a collection of Agents (instances of that template)
         - It also contains a simple initiative tracker
