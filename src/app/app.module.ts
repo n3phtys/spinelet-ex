@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { AgentVisualizeComponent } from './agent-visualize/agent-visualize.component';
+import { SelectorAgentsComponent } from './selector-agents/selector-agents.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AgentVisualizeComponent,
+    SelectorAgentsComponent
   ],
   imports: [
     BrowserModule,
