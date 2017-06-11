@@ -27,7 +27,7 @@ before_install:
 
 before_script:
   - echo "Starting before script"
-  - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost:4200
+  - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost:4200 &
   - echo "Finished before script"
 
 script:
