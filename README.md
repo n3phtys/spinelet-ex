@@ -1,4 +1,16 @@
-# SpineletEx
+# Spinelet-Ex
+[![Build Status](https://travis-ci.org/n3phtys/spinelet-ex.svg?branch=master)](https://travis-ci.org/n3phtys/spinelet-ex)
+
+This is a value tracker for Exalted 3rd Edition combat.
+This does not only track initiative, but also things like soak and health. It is designed to be visible to every player.
+
+
+
+
+
+
+# Angular Stuff:
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.1.
 
