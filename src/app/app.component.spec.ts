@@ -2,13 +2,19 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { BattleSelectorComponent } from 'app/battle-selector/battle-selector.component';
+import { BattleLibraryService } from 'app/battle-library.service';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        BattleSelectorComponent
       ],
+    providers: [
+      BattleLibraryService
+    ],
     });
     TestBed.compileComponents();
   });

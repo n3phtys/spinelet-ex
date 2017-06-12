@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BattleSelectorComponent } from './battle-selector.component';
+import { BattleLibraryService } from 'app/battle-library.service';
 
 describe('BattleSelectorComponent', () => {
   let component: BattleSelectorComponent;
@@ -8,7 +9,10 @@ describe('BattleSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BattleSelectorComponent ]
+      declarations: [ BattleSelectorComponent ],
+    providers: [
+      BattleLibraryService
+    ],
     })
     .compileComponents();
   }));
