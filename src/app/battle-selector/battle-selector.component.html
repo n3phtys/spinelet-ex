@@ -1,3 +1,10 @@
-<p>
+<h2>
   battle-selector works!
-</p>
+</h2>
+<button (click)="addBattle()">Add new battle</button>
+<ul>
+  <li *ngFor="let battle of battleLibraryService.battles; let bIdx = index">{{battle.title}}
+    <button (click)="select(bIdx)" [disabled]="battleLibraryService.openedIndex == bIdx">select</button>
+    <button (click)="delete(bIdx)">delete</button>
+  </li>
+</ul>

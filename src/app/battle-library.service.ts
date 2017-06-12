@@ -7,10 +7,24 @@ import {Observable} from 'rxjs/Rx';
 export class BattleLibraryService {
 
   public battles: Battle[] = [];
-  private openedIndex = (this.battles != null && this.battles.length > 0) ? 0 : -1;
+  public openedIndex = (this.battles != null && this.battles.length > 0) ? 0 : -1;
   private openedIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.openedIndex);
 
-  constructor() { }
+  constructor() {
+    this.createNewBattleAndPrepend();
+    this.createNewBattleAndPrepend();
+    this.createNewBattleAndPrepend();
+    this.battles[0].title = 'First battle';
+    this.battles[0].description = 'Description of first battle';
+    this.battles[0].round = 0;
+    this.battles[1].title = 'Second battle';
+    this.battles[1].description = 'Description of second battle';
+    this.battles[1].round = 1;
+    this.battles[2].title = 'Third battle';
+    this.battles[2].description = 'Description of third battle';
+    this.battles[2].round = 0;
+    console.log(this.openedIndex);
+   }
 
   public storeChangesOfBattle(index: number) {
       // TODO
@@ -25,9 +39,16 @@ export class BattleLibraryService {
     return this.openedIndexSubject;
   }
 
-  public deleteOpenedBattleAndSelectNextOne() {
-    if (this.openedIndex >= 0 && this.battles != null && this.openedIndex < this.battles.length) {
-      this.battles.splice(this.openedIndex, 1)
+  public deleteBattleAndSelectNextOne(index: number) {
+    const moveDown = index <= this.openedIndex;
+    if (index >= 0 && this.battles != null && index < this.battles.length) {
+      this.battles.splice(index, 1)
+      if (moveDown) {
+          this.openedIndex -= 1;
+          if (this.openedIndex < 0 && this.battles != null && this.battles.length > 0) {
+            this.openedIndex = 0;
+          }
+      }
     }
   }
 
@@ -37,6 +58,7 @@ export class BattleLibraryService {
     } else {
       this.battles = [new Battle()];
     }
+    this.battles[0].title = 'New Battle';
     if (this.openedIndex >= 0 && this.battles != null && this.openedIndex < this.battles.length) {
       this.openedIndex = this.openedIndex + 1;
     } else {
