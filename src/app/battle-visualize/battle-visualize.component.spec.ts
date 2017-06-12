@@ -7,6 +7,7 @@ import { SelectorAgentsComponent } from 'app/selector-agents/selector-agents.com
 import { AgentVisualizeComponent } from 'app/agent-visualize/agent-visualize.component';
 import { AgentLibraryService } from 'app/agent-library.service';
 import { FormsModule } from '@angular/forms';
+import { EnumPipePipe } from "app/enum-pipe.pipe";
 
 describe('BattleVisualizeComponent', () => {
   let component: BattleVisualizeComponent;
@@ -21,7 +22,8 @@ describe('BattleVisualizeComponent', () => {
     AgentVisualizeComponent,
     SelectorAgentsComponent,
     BattleVisualizeComponent,
-    AgentCreatorComponent
+    AgentCreatorComponent,
+    EnumPipePipe
       ],
     providers: [
     BattleLibraryService,

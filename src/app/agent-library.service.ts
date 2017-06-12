@@ -10,4 +10,14 @@ export class AgentLibraryService {
   constructor() { }
 
 
+  addAgentToLibrary(agent: Agent) {
+    this.agentsInLibrary.push(agent);
+// TODO
+  }
+
+  deleteByIndex(index: number) {
+      this.agentsInLibrary.splice(index, 1);
+// TODO
+  }
+
 }

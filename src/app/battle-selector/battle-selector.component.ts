@@ -17,8 +17,7 @@ export class BattleSelectorComponent implements OnInit {
 
 
   delete(idx: number) {
-    console.log('pressed delete: ' + idx);
-    if (alert('Do you really want to delete ' + this.battleLibraryService.battles[idx].title + ' permanently?')) {
+    if (confirm('Do you really want to delete ' + this.battleLibraryService.battles[idx].title + ' permanently?')) {
       this.battleLibraryService.deleteBattleAndSelectNextOne(idx);
     }
   }

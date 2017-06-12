@@ -23,7 +23,6 @@ export class BattleLibraryService {
     this.battles[2].title = 'Third battle';
     this.battles[2].description = 'Description of third battle';
     this.battles[2].round = 0;
-    console.log(this.openedIndex);
    }
 
   public storeChangesOfBattle(index: number) {

@@ -11,6 +11,7 @@ import { BattleLibraryService } from 'app/battle-library.service';
 import { BattleVisualizeComponent } from './battle-visualize/battle-visualize.component';
 import { AgentCreatorComponent } from './agent-creator/agent-creator.component';
 import { AgentLibraryService } from 'app/agent-library.service';
+import { EnumPipePipe } from './enum-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AgentLibraryService } from 'app/agent-library.service';
     SelectorAgentsComponent,
     BattleSelectorComponent,
     BattleVisualizeComponent,
-    AgentCreatorComponent
+    AgentCreatorComponent,
+    EnumPipePipe
   ],
   imports: [
     BrowserModule,

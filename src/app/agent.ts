@@ -7,7 +7,8 @@ export class Agent {
 
     title: string;
     description: string;
-    avatarUrl: string;
+    // tslint:disable-next-line:no-inferrable-types
+    avatarUrl: string = 'https://i.imgur.com/62u4HpI.png';
     parryDV: number;
     evasionDV: number;
     soak: number;
@@ -23,10 +24,10 @@ export class Agent {
     damageLethal: number;
     damageBashing: number;
     damageAggravated: number;
-    type: AgentType;
+    type: AgentType = AgentType.Special;
     might: number;
     size: number;
-    drill: Drill;
+    drill: Drill = Drill.Average;
     magnitude: number;
     hasActedThisRound: boolean;
     active: boolean;
@@ -45,8 +46,9 @@ export class Agent {
         entitity.parryDV = parry;
         entitity.evasionDV = evasion;
         entitity.soak = basicSoak + size;
+        entitity.hardness = hardness;
         entitity.initiative = 0;
-        entitity.hpWPZero = 0;
+        entitity.hpWPZero = basicHP;
         entitity.hpWPOne = 0;
         entitity.hpWPTwo = 0;
         entitity.hpWPFour = 0;
@@ -76,6 +78,7 @@ export class Agent {
         entitity.parryDV = parry;
         entitity.evasionDV = evasion;
         entitity.soak = soak;
+        entitity.hardness = hardness;
         entitity.initiative = 0;
         entitity.hpWPZero = hpWPZero;
         entitity.hpWPOne = hpWPOne;
@@ -107,6 +110,7 @@ export class Agent {
         entitity.parryDV = parry;
         entitity.evasionDV = evasion;
         entitity.soak = soak;
+        entitity.hardness = hardness;
         entitity.initiative = 0;
         entitity.hpWPZero = hpWPZero;
         entitity.hpWPOne = hpWPOne;
@@ -137,6 +141,7 @@ export class Agent {
         entitity.parryDV = parry;
         entitity.evasionDV = evasion;
         entitity.soak = soak;
+        entitity.hardness = hardness;
         entitity.initiative = 0;
         entitity.hpWPZero = hpWPZero;
         entitity.hpWPOne = hpWPOne;
@@ -153,6 +158,26 @@ export class Agent {
         entitity.active = true;
         entitity.conditions = [];
         return entitity;
+    }
+
+    static buildFromTemporaryAgent(agent: Agent): Agent {
+        if (agent.type === AgentType.Battlegroup) {
+            return this.Battlegroup(agent.title, agent.description, agent.avatarUrl,
+            agent.drill, agent.size, agent.might, agent.hpWPZero, agent.soak, agent.hardness,
+            agent.evasionDV, agent.parryDV);
+        } else if (agent.type === AgentType.Special) {
+            return this.SpecialIndividual(agent.soak, agent.hardness, agent.title, agent.description,
+            agent.avatarUrl, agent.hpWPZero, agent.hpWPOne, agent.hpWPTwo, agent.hpWPFour,
+            agent.evasionDV, agent.parryDV);
+        } else if (agent.type === AgentType.Strong) {
+            return this.StrongIndividual(agent.soak, agent.hardness, agent.title, agent.description,
+            agent.avatarUrl, agent.hpWPZero, agent.hpWPOne, agent.hpWPTwo, agent.hpWPFour,
+            agent.evasionDV, agent.parryDV);
+        } else {
+            return this.WeakIndividual(agent.soak, agent.hardness, agent.title, agent.description,
+            agent.avatarUrl, agent.hpWPZero, agent.hpWPOne, agent.hpWPTwo, agent.hpWPFour,
+            agent.evasionDV, agent.parryDV);
+        }
     }
 
 
@@ -215,6 +240,11 @@ export class Agent {
             }
         }
     }
+
+    clone(): Agent {
+        return JSON.parse(JSON.stringify(this)) as Agent;
+    }
+
 }
 
 
