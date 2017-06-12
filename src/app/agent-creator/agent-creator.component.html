@@ -1,0 +1,147 @@
+    <div>
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#agentlibrary">Load Template from Library</button>
+
+    <div id="agentlibrary" class="collapse">
+        <hr>
+        <ul>
+          <li *ngFor="let agent of agentLibraryService.agentsInLibrary; let idx = index">
+    <button (click)="deleteAgentInLibrary(idx)" class="btn btn-danger">delete</button>
+    <button (click)="loadAgentFromLibrary(idx)" class="btn btn-success">load</button>
+            {{agent.title}}
+            </li>
+          </ul>
+        <hr>
+    </div>
+    </div>
+    <div>
+
+      <h3>Add new Agent to Battle</h3>
+
+      <form class="form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="avatarurl">   SELECT TYPE  Avatar URL:</label>
+    <div class="col-sm-10"> 
+      <input type="url" class="form-control" id="avatarurl" placeholder="Enter url">
+      <div style="width: 150px; height: 150px;text-align:center;">
+      <img src="https://i.imgur.com/62u4HpI.png" 
+       style="width: inherit;">
+       </div>
+    </div>
+    </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">
+  IF BATTLEGROUP Size:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Drill:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Might:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter title">
+    </div>
+  </div>
+  
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+
+    <button type="button" class="btn btn-info">Save Agent to Template Library</button>
+    <button type="submit" class="btn btn-primary">Add Agent to Battle</button>
+    </div>
+  </div>
+</form>
+
+inputs with labels for the following:
+
+      - titel
+      - select for type
+      - avatarUrl
+      - description
+      - parryDV
+      - evasionDV 
+      - soak 
+      - hardness
+    hpWPZero: number;
+    hpWPOne: number;
+    hpWPTwo: number;
+    hpWPFour: number;
+
+    if battlegroup:
+    might: number;
+    size: number;
+    drill: Drill;
+    magnitude: number;
+    
+
+    </div>
+    

@@ -8,13 +8,18 @@ import { AgentVisualizeComponent } from './agent-visualize/agent-visualize.compo
 import { SelectorAgentsComponent } from './selector-agents/selector-agents.component';
 import { BattleSelectorComponent } from './battle-selector/battle-selector.component';
 import { BattleLibraryService } from 'app/battle-library.service';
+import { BattleVisualizeComponent } from './battle-visualize/battle-visualize.component';
+import { AgentCreatorComponent } from './agent-creator/agent-creator.component';
+import { AgentLibraryService } from 'app/agent-library.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     AgentVisualizeComponent,
     SelectorAgentsComponent,
-    BattleSelectorComponent
+    BattleSelectorComponent,
+    BattleVisualizeComponent,
+    AgentCreatorComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,8 @@ import { BattleLibraryService } from 'app/battle-library.service';
     HttpModule
   ],
   providers: [
-    BattleLibraryService
+    BattleLibraryService,
+    AgentLibraryService
   ],
   bootstrap: [AppComponent]
 })

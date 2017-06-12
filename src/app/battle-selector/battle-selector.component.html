@@ -4,7 +4,7 @@
 <button (click)="addBattle()">Add new battle</button>
 <ul>
   <li *ngFor="let battle of battleLibraryService.battles; let bIdx = index">{{battle.title}}
-    <button (click)="select(bIdx)" [disabled]="battleLibraryService.openedIndex == bIdx">select</button>
-    <button (click)="delete(bIdx)">delete</button>
+    <button (click)="select(bIdx)" class="btn btn-primary" [disabled]="battleLibraryService.openedIndex == bIdx">select</button>
+    <button (click)="delete(bIdx)" class="btn btn-danger">delete</button>
   </li>
 </ul>
