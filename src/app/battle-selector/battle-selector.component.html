@@ -3,8 +3,9 @@
 </h2>
 <button (click)="addBattle()">Add new battle</button>
 <ul>
-  <li *ngFor="let battle of battleLibraryService.battles; let bIdx = index">{{battle.title}}
+  <li *ngFor="let battle of battleLibraryService.battles; let bIdx = index">
     <button (click)="select(bIdx)" class="btn btn-primary" [disabled]="battleLibraryService.openedIndex == bIdx">select</button>
     <button (click)="delete(bIdx)" class="btn btn-danger">delete</button>
+    {{battle.title}}
   </li>
 </ul>
