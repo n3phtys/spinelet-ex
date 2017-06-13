@@ -33,6 +33,9 @@ export class Agent {
     active: boolean;
     conditions: CustomCondition[];
 
+    background_color: string;
+
+
     // battlegroup
     static Battlegroup(title: string, description: string, avatarUrl: string,
         drill: Drill, size: number,
@@ -62,6 +65,7 @@ export class Agent {
         entitity.magnitude = basicHP + size + 1; // +1 for incapicated
         entitity.active = true;
         entitity.conditions = [];
+        entitity.recomputeBackgroundColor();
         return entitity;
     }
 
@@ -94,6 +98,7 @@ export class Agent {
         entitity.magnitude = 0;
         entitity.active = true;
         entitity.conditions = [];
+        entitity.recomputeBackgroundColor();
         return entitity;
     }
 
@@ -126,6 +131,7 @@ export class Agent {
         entitity.magnitude = 0;
         entitity.active = true;
         entitity.conditions = [];
+        entitity.recomputeBackgroundColor();
         return entitity;
     }
 
@@ -157,6 +163,7 @@ export class Agent {
         entitity.magnitude = 0;
         entitity.active = true;
         entitity.conditions = [];
+        entitity.recomputeBackgroundColor();
         return entitity;
     }
 
@@ -249,6 +256,17 @@ return Object.setPrototypeOf(cp, Agent.prototype);
             }
         }
     }
+
+    recomputeBackgroundColor() {
+        if (!this.active) {
+     this.background_color =  'grey';
+    } else if (this.hasActedThisRound) {
+this.background_color = 'white';
+    } else {
+this.background_color =       'lightblue';
+    }
+    }
+
 
 
     toJson(): string {

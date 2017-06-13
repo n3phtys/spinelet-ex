@@ -15,6 +15,10 @@ return Object.setPrototypeOf(cp, Battle.prototype);
     }
 
 
+    increaseRound() {
+        this.round += 1;
+        this.actors.forEach(a => a.hasActedThisRound = false);
+    }
 
     toJson(): string {
         return JSON.stringify(this)

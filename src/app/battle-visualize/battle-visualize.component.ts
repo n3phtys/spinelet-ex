@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BattleLibraryService } from 'app/battle-library.service';
 import { Agent } from "app/agent";
 
@@ -10,6 +10,7 @@ import { Agent } from "app/agent";
 export class BattleVisualizeComponent implements OnInit {
 
   public sortedAgents: Agent[] = null;
+
 
   constructor(public battleLibraryService: BattleLibraryService) { }
 
@@ -27,4 +28,24 @@ export class BattleVisualizeComponent implements OnInit {
     }
   }
 
+  refreshForce() {
+    if (this.battleLibraryService.isOpened()) {
+    this.battleLibraryService.getOpenBattle().actors.forEach(element => {
+      element.recomputeBackgroundColor();
+    });
+    }
+  }
+
+  endRound() {
+    let finished = true;
+    this.battleLibraryService.getOpenBattle().actors.forEach(a => {
+      if (finished && !a.hasActedThisRound && a.active) {
+        finished = false;
+      }
+    });
+    if (finished || confirm('Not every agent has made an Action this round, do you really want to end this round?')) {
+      this.battleLibraryService.getOpenBattle().increaseRound();
+      this.refreshForce();
+    }
+  }
 }

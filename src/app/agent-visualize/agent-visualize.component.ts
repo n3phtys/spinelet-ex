@@ -16,7 +16,6 @@ export class AgentVisualizeComponent implements OnInit, OnChanges {
 
   @Output() reorder: EventEmitter<Agent> = new EventEmitter<Agent>();
 
-  public background_color= 'lightblue';
 
   public Drill = Drill;
 
@@ -34,13 +33,7 @@ export class AgentVisualizeComponent implements OnInit, OnChanges {
   }
 
   private computeBackgroundColor() {
-if (!this.agent.active) {
-     this.background_color =  'grey';
-    } else if (this.agent.hasActedThisRound) {
-this.background_color = 'white';
-    } else {
-this.background_color =       'lightblue';
-    }
+    this.agent.recomputeBackgroundColor();
   }
 
   commitAction() {
