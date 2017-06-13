@@ -32,12 +32,6 @@
 <button>End Round</button>
 <hr>
 
-Here be agent visualizers
 <ul class="agent-list">
-  <app-agent-visualize></app-agent-visualize>
-  <app-agent-visualize></app-agent-visualize>
-  <app-agent-visualize></app-agent-visualize>
-  <app-agent-visualize></app-agent-visualize>
-  <app-agent-visualize></app-agent-visualize>
-  <app-agent-visualize></app-agent-visualize>
+  <app-agent-visualize *ngFor="let ag of battleLibraryService.battles[battleLibraryService.openedIndex].actors; let idx = index" [agent]="ag"></app-agent-visualize>
 </ul>

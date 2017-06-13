@@ -12,6 +12,7 @@ import { BattleVisualizeComponent } from './battle-visualize/battle-visualize.co
 import { AgentCreatorComponent } from './agent-creator/agent-creator.component';
 import { AgentLibraryService } from 'app/agent-library.service';
 import { EnumPipePipe } from './enum-pipe.pipe';
+import { WoundpenaltyPipe } from './woundpenalty.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EnumPipePipe } from './enum-pipe.pipe';
     BattleSelectorComponent,
     BattleVisualizeComponent,
     AgentCreatorComponent,
-    EnumPipePipe
+    EnumPipePipe,
+    WoundpenaltyPipe
   ],
   imports: [
     BrowserModule,

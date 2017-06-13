@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Battle } from 'app/battle';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Rx';
+import { PREMADE_AGENTS } from 'app/agent';
 
 @Injectable()
 export class BattleLibraryService {
@@ -23,6 +24,9 @@ export class BattleLibraryService {
     this.battles[2].title = 'Third battle';
     this.battles[2].description = 'Description of third battle';
     this.battles[2].round = 0;
+
+    this.battles[2].actors = [];
+    PREMADE_AGENTS.forEach(ag => this.battles[2].actors.push(ag.clone()));
    }
 
   public storeChangesOfBattle(index: number) {

@@ -8,7 +8,8 @@ import { SelectorAgentsComponent } from 'app/selector-agents/selector-agents.com
 import { AgentVisualizeComponent } from 'app/agent-visualize/agent-visualize.component';
 import { AgentLibraryService } from 'app/agent-library.service';
 import { FormsModule } from '@angular/forms';
-import { EnumPipePipe } from "app/enum-pipe.pipe";
+import { EnumPipePipe } from 'app/enum-pipe.pipe';
+import { WoundpenaltyPipe } from 'app/woundpenalty.pipe';
 
 describe('AgentCreatorComponent', () => {
   let component: AgentCreatorComponent;
@@ -20,12 +21,13 @@ describe('AgentCreatorComponent', () => {
         FormsModule
       ],
       declarations: [
+    EnumPipePipe,
+    WoundpenaltyPipe,
     AgentVisualizeComponent,
     SelectorAgentsComponent,
     BattleSelectorComponent,
     BattleVisualizeComponent,
-    AgentCreatorComponent,
-    EnumPipePipe
+    AgentCreatorComponent
       ],
     providers: [
     BattleLibraryService,
