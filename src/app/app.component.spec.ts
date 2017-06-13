@@ -10,8 +10,9 @@ import { SelectorAgentsComponent } from 'app/selector-agents/selector-agents.com
 import { AgentVisualizeComponent } from 'app/agent-visualize/agent-visualize.component';
 import { AgentLibraryService } from 'app/agent-library.service';
 import { FormsModule } from '@angular/forms';
-import { EnumPipePipe } from "app/enum-pipe.pipe";
-import { WoundpenaltyPipe } from "app/woundpenalty.pipe";
+import { EnumPipePipe } from 'app/enum-pipe.pipe';
+import { WoundpenaltyPipe } from 'app/woundpenalty.pipe';
+import { SortbyinitiativePipe } from "app/sortbyinitiative.pipe";
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -27,7 +28,8 @@ describe('AppComponent', () => {
     BattleVisualizeComponent,
     AgentCreatorComponent,
     EnumPipePipe,
-    WoundpenaltyPipe
+    WoundpenaltyPipe,
+    SortbyinitiativePipe
       ],
     providers: [
     BattleLibraryService,
@@ -49,10 +51,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Spinelet-EX works!');
   }));
 
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Spinelet-EX works!');
-  }));
 });

@@ -10,6 +10,7 @@ import { AgentLibraryService } from 'app/agent-library.service';
 import { FormsModule } from '@angular/forms';
 import { EnumPipePipe } from 'app/enum-pipe.pipe';
 import { WoundpenaltyPipe } from 'app/woundpenalty.pipe';
+import { SortbyinitiativePipe } from "app/sortbyinitiative.pipe";
 
 describe('AgentCreatorComponent', () => {
   let component: AgentCreatorComponent;
@@ -27,7 +28,8 @@ describe('AgentCreatorComponent', () => {
     SelectorAgentsComponent,
     BattleSelectorComponent,
     BattleVisualizeComponent,
-    AgentCreatorComponent
+    AgentCreatorComponent,
+    SortbyinitiativePipe
       ],
     providers: [
     BattleLibraryService,

@@ -9,6 +9,7 @@ import { AgentLibraryService } from 'app/agent-library.service';
 import { FormsModule } from '@angular/forms';
 import { EnumPipePipe } from 'app/enum-pipe.pipe';
 import { WoundpenaltyPipe } from 'app/woundpenalty.pipe';
+import { SortbyinitiativePipe } from "app/sortbyinitiative.pipe";
 
 describe('BattleVisualizeComponent', () => {
   let component: BattleVisualizeComponent;
@@ -25,7 +26,8 @@ describe('BattleVisualizeComponent', () => {
     BattleVisualizeComponent,
     AgentCreatorComponent,
     EnumPipePipe,
-    WoundpenaltyPipe
+    WoundpenaltyPipe,
+    SortbyinitiativePipe
       ],
     providers: [
     BattleLibraryService,

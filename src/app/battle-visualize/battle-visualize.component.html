@@ -1,6 +1,17 @@
-<h2>
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapseBattleDetail">
+          <h2>
   Battle: {{battleLibraryService.battles[battleLibraryService.openedIndex].title}}
 </h2>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseBattleDetail" class="panel-collapse collapse">
+      <div class="panel-body">
 <div>
 <div>
   <input [(ngModel)]="battleLibraryService.battles[battleLibraryService.openedIndex].title" />
@@ -14,24 +25,32 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse1">Add Agent to Battle</a>
+        <a data-toggle="collapse" href="#collapseAddAgent">Add Agent to Battle</a>
       </h4>
     </div>
-    <div id="collapse1" class="panel-collapse collapse">
+    <div id="collapseAddAgent" class="panel-collapse collapse">
       <div class="panel-body">
+        <app-agent-creator></app-agent-creator>
       </div>
     </div>
   </div>
 </div>
-        <app-agent-creator></app-agent-creator>
 <hr>
 <button>Persist Changes</button>
 <hr>
 <button>Decrease Round</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <p>Round {{battleLibraryService.battles[battleLibraryService.openedIndex].round}}</p>
 <button>End Round</button>
 <hr>
 
 <ul class="agent-list">
-  <app-agent-visualize *ngFor="let ag of battleLibraryService.battles[battleLibraryService.openedIndex].actors; let idx = index" [agent]="ag"></app-agent-visualize>
+  <app-agent-visualize *ngFor="let ag of battleLibraryService.battles[battleLibraryService.openedIndex].actors | sortbyinitiative; let idx = index" [agent]="ag" 
+  [battle]="battleLibraryService.battles[battleLibraryService.openedIndex]" [index]="idx" ></app-agent-visualize>
 </ul>

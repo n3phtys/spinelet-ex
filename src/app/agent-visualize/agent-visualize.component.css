@@ -2,8 +2,11 @@
 
 .agent-visualize-container {
   padding: 5px;
-  width: 200px;
-  margin: 10px;
+  width: 230px;
+  margin: 5px;
   text-align: center;
-  background-color: lightblue;
+}
+
+.description {
+  font-size: 75%;
 }

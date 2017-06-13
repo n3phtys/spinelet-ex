@@ -1,24 +1,26 @@
-<li class="agent-visualize-container">
+<li class="agent-visualize-container"  [ngStyle]="{ 'background-color': background_color }" >
   <div *ngIf="agent">
 
-<div style="display:table-cell; vertical-align:middle; text-align:center; width: 190px; height: 150px;">
+<div style="display:table-cell; vertical-align:middle; text-align:center; width: 220px; height: 120px;">
       <img [src]="agent.avatarUrl" 
        style="width: inherit;">
 </div>
 
 <div>
-    agent.title: string;
-    agent.description: string;
+
+    TODO: symbol for type on the left side 
+
+    TODO: symbol for initiative on the right side
+
+    <h4>{{agent.title}}</h4>
+
+    <div class="description">{{agent.description}}</div>
+    <label> Parry: {{agent.parryDV}} / Evasion: {{agent.evasionDV}} </label>
+    <label> Soak: {{agent.soak}} / Hardness: {{agent.hardness}} </label>
     
-    agent.parryDV: number;
-    agent.evasionDV: number;
-    agent.soak: number;
-    agent.hardness: number;
-    agent.initiative: number;
 
 
 
-    Collapse live points into one number and a wound penalty (or magnitude + size in battlegroup)
   </div>
 
     <div *ngIf="agent.type!=1">
@@ -27,38 +29,43 @@
 
     </div>
     
-    agent.type: AgentType = AgentType.Special;
 
-    SHow battlegroup features only if battle group
     <div *ngIf="agent.type==1">
-    agent.might: number;
-    agent.size: number;
-    agent.drill: Drill = Drill.Average;
+    <div>
+      Might: {{agent.might}}
+      </div>
+      <div>
+    Drill: {{ Drill[agent.drill]}}
+      </div>
+
+      <div>
     agent.magnitude: number;
+    agent.size: number;
+      </div>
     </div>
+<hr>    
+
+<button (click)="commitAction()">Action this round</button>
+<button>Set Initiative</button>
+<button>Increase Initiative</button>
+<button>Decrease Initiative</button>
+<button disabled>Take Withering Damage</button>
 
 
-    Show more intelligent:
-    agent.hasActedThisRound: boolean;
-    agent.active: boolean;
-    agent.conditions
-
-<button>Test</button>
-<button>Test</button>
-<button>Test</button>
-<button>Test</button>
-<button>Test</button>
+<button disabled>Take Decisive Damage</button>
+<button disabled>Heal Damage</button>
+<button disabled>Add Custom Condition</button>
+<button (click)="disableEnable()">Dis-/Enable</button>
+<button (click)="remove()">Remove</button>
 
 
-<button>Test</button>
-<button>Test</button>
-<button>Test</button>
-<button>Test</button>
-<button>Test</button>
-
-
-<button>Test</button>
-<button>Test</button>
+    <div *ngIf="agent.conditions.length  > 0">
+<hr>
+    <label>Conditions:</label>
+    <ul>
+      <li *ngFor="let condition of agent.conditions; let cidx = index">{{condition}}</li>
+    </ul>
+    </div>
 
 </div>
 </li>

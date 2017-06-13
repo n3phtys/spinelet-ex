@@ -13,6 +13,7 @@ import { AgentCreatorComponent } from './agent-creator/agent-creator.component';
 import { AgentLibraryService } from 'app/agent-library.service';
 import { EnumPipePipe } from './enum-pipe.pipe';
 import { WoundpenaltyPipe } from './woundpenalty.pipe';
+import { SortbyinitiativePipe } from './sortbyinitiative.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { WoundpenaltyPipe } from './woundpenalty.pipe';
     BattleVisualizeComponent,
     AgentCreatorComponent,
     EnumPipePipe,
-    WoundpenaltyPipe
+    WoundpenaltyPipe,
+    SortbyinitiativePipe
   ],
   imports: [
     BrowserModule,

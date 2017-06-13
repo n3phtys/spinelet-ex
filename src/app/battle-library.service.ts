@@ -27,6 +27,9 @@ export class BattleLibraryService {
 
     this.battles[2].actors = [];
     PREMADE_AGENTS.forEach(ag => this.battles[2].actors.push(ag.clone()));
+    this.battles[2].actors[4].initiative = 13;
+    this.battles[2].actors[2].initiative = 4;
+    this.battles[2].actors[0].initiative = 1;
    }
 
   public storeChangesOfBattle(index: number) {
