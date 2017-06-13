@@ -51,6 +51,6 @@
 <hr>
 
 <ul class="agent-list">
-  <app-agent-visualize *ngFor="let ag of battleLibraryService.battles[battleLibraryService.openedIndex].actors | sortbyinitiative; let idx = index" [agent]="ag" 
-  [battle]="battleLibraryService.battles[battleLibraryService.openedIndex]" [index]="idx" ></app-agent-visualize>
+  <app-agent-visualize *ngFor="let ag of sortedAgents; let idx = index" [agent]="ag" 
+  [battle]="battleLibraryService.battles[battleLibraryService.openedIndex]" [index]="idx" (reorder)="resort()" ></app-agent-visualize>
 </ul>

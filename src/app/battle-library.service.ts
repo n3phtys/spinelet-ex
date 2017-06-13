@@ -76,6 +76,10 @@ export class BattleLibraryService {
     return this.battles != null && this.battles.length > this.openedIndex && this.openedIndex >= 0;
   }
 
+  public getOpenBattle() {
+    return this.battles[this.openedIndex];
+  }
+
   public isOpenedRx() {
     return this.openedIndexRx().map(i => this.battles != null && i >= 0 && i < this.battles.length);
   }

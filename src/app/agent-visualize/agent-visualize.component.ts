@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { Agent } from 'app/agent';
 import { Battle } from 'app/battle';
 import { Drill } from 'app/drill.enum';
@@ -13,6 +13,8 @@ export class AgentVisualizeComponent implements OnInit, OnChanges {
   @Input() agent: Agent = null;
   @Input() index: number;
   @Input() battle: Battle = null;
+
+  @Output() reorder: EventEmitter<Agent> = new EventEmitter<Agent>();
 
   public background_color= 'lightblue';
 
@@ -54,6 +56,8 @@ this.background_color =       'lightblue';
   }
 
   remove() {
+      //TODO: this is nonsense thanks to reorder
+
     if (this.battle != null && this.index != null && this.index >= 0 && this.index < this.battle.actors.length
     && confirm('Do you really want to delete this Agent from the current Battle?')) {
       this.battle.actors.splice(this.index, 1);
@@ -68,6 +72,7 @@ this.background_color =       'lightblue';
       const v: number = parseInt(value, 10);
     console.log(v);
       this.agent.increaseInitiative(v);
+      this.reorder.emit(this.agent);
     }
   }
 
@@ -75,6 +80,7 @@ this.background_color =       'lightblue';
     const value = prompt('Please how many Initiative points you want to subtract', '1');
     if (value != null && this.agent != null) {
       this.agent.decreaseInitiative(parseInt(value, 10));
+      this.reorder.emit(this.agent);
     }
 
   }
@@ -83,6 +89,7 @@ this.background_color =       'lightblue';
     const value = prompt('Please to which value you want to set the Initiative of this Agent', '3');
     if (value != null && this.agent != null) {
       this.agent.setInitiative(parseInt(value, 10));
+      this.reorder.emit(this.agent);
     }
   }
 
