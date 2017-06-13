@@ -60,4 +60,30 @@ this.background_color =       'lightblue';
     }
   }
 
+
+  plusInitiative() {
+    const value = prompt('Please write how many Initiative points you want to add', '1');
+    console.log(this.agent);
+    if (value != null && this.agent != null) {
+      const v: number = parseInt(value, 10);
+    console.log(v);
+      this.agent.increaseInitiative(v);
+    }
+  }
+
+  minusInitiative() {
+    const value = prompt('Please how many Initiative points you want to subtract', '1');
+    if (value != null && this.agent != null) {
+      this.agent.decreaseInitiative(parseInt(value, 10));
+    }
+
+  }
+
+  setInitiative() {
+    const value = prompt('Please to which value you want to set the Initiative of this Agent', '3');
+    if (value != null && this.agent != null) {
+      this.agent.setInitiative(parseInt(value, 10));
+    }
+  }
+
 }

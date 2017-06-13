@@ -180,16 +180,25 @@ export class Agent {
         }
     }
 
-
-
-    decreaseInitiative(d: number) {
-
+    static fromJson(json: string): Agent {
+        const cp = JSON.parse(json);
+return Object.setPrototypeOf(cp, Agent.prototype);
     }
-    increaseInitiative(d: number) {
 
+
+    public decreaseInitiative(d: number) {
+        // TODO: implement more
+        this.initiative -= d;
     }
-    setInitiative(i: number) {
+    public increaseInitiative(d: number) {
 
+        // TODO: implement more
+        this.initiative += d;
+    }
+    public setInitiative(i: number) {
+
+        // TODO: implement more
+        this.initiative = i;
     }
 
     increaseSize(d: number) {
@@ -241,11 +250,17 @@ export class Agent {
         }
     }
 
+
+    toJson(): string {
+        return JSON.stringify(this)
+    }
+
     clone(): Agent {
-        return JSON.parse(JSON.stringify(this)) as Agent;
+        return Agent.fromJson(this.toJson());
     }
 
 }
+
 
 
 export const PREMADE_AGENTS: Agent[] = [
