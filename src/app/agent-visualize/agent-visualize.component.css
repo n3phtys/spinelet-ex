@@ -5,8 +5,110 @@
   width: 230px;
   margin: 5px;
   text-align: center;
+  position:relative;
 }
 
 .description {
   font-size: 75%;
+}
+
+
+.numberCircle {
+    border-radius: 50%;
+
+    width: 38px;
+    height: 38px;
+    padding: 2px;
+    margin-bottom: 5px;
+
+  position: absolute;
+  top: 8px;
+  right: 8px;
+    
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    
+    font: 24px Arial, sans-serif;
+}
+
+.symbolBG {
+    border-radius: 50%;
+
+    width: 38px;
+    height: 38px;
+    padding: 2px;
+    margin-bottom: 5px;
+
+  position: absolute;
+  top: 8px;
+  left: 8px;
+
+    background: white;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    
+    font: 24px Arial;
+}
+
+.symbolWeak {
+    border-radius: 50%;
+
+    width: 38px;
+    height: 38px;
+    padding: 2px;
+    margin-bottom: 5px;
+
+  position: absolute;
+  top: 8px;
+  left: 8px;
+    background: yellow;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    
+    font: 24px Arial, sans-serif;
+
+}
+
+.symbolStrong {
+    border-radius: 50%;
+
+    width: 38px;
+    height: 38px;
+    padding: 2px;
+    margin-bottom: 5px;
+
+  position: absolute;
+  top: 8px;
+  left: 8px;
+    background: greenyellow;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    
+    font: 24px Arial, sans-serif;
+
+}
+
+.symbolSpecial {
+    border-radius: 50%;
+
+    width: 38px;
+    height: 38px;
+    padding: 2px;
+    margin-bottom: 5px;
+
+  position: absolute;
+  top: 8px;
+  left: 8px;
+    background: green;
+    border: 2px solid black;
+    color: white;
+    text-align: center;
+    
+    font: 24px Arial, sans-serif;
+
 }
