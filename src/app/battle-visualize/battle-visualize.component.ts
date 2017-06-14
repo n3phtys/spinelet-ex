@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BattleLibraryService } from 'app/battle-library.service';
-import { Agent } from "app/agent";
+import { Agent } from 'app/agent';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-battle-visualize',
@@ -10,9 +11,16 @@ import { Agent } from "app/agent";
 export class BattleVisualizeComponent implements OnInit {
 
   public sortedAgents: Agent[] = null;
+  private battleStoring: Subject<boolean> = new Subject<boolean>();
 
 
-  constructor(public battleLibraryService: BattleLibraryService) { }
+  constructor(public battleLibraryService: BattleLibraryService) {
+    // store once every 10s
+    this.battleStoring.sampleTime(1000).subscribe(a => {
+      console.log('Debounced Storing Triggered');
+      this.battleLibraryService.storeChangesOfBattle(this.battleLibraryService.openedIndex);
+    });
+  }
 
   ngOnInit() {
     this.resort();
@@ -28,6 +36,7 @@ export class BattleVisualizeComponent implements OnInit {
       }
       this.sortedAgents.sort((a, b) => b.initiative -  a.initiative + 1)
     }
+    this.saveBattle();
   }
 
   refreshForce() {
@@ -48,6 +57,12 @@ export class BattleVisualizeComponent implements OnInit {
     if (finished || confirm('Not every agent has made an Action this round, do you really want to end this round?')) {
       this.battleLibraryService.getOpenBattle().increaseRound();
       this.refreshForce();
+      this.battleLibraryService.storeChangesOfBattle(0);
     }
+  }
+
+  saveBattle() {
+    console.log('Before debounce');
+    this.battleStoring.next(true);
   }
 }

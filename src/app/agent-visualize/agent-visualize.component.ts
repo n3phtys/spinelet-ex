@@ -26,9 +26,6 @@ export class AgentVisualizeComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('Input changed to:');
-    console.log(this.agent);
-
     this.computeBackgroundColor();
   }
 
@@ -39,12 +36,14 @@ export class AgentVisualizeComponent implements OnInit, OnChanges {
   commitAction() {
     this.agent.hasActedThisRound = true;
     this.computeBackgroundColor();
+      this.reorder.emit(this.agent);
   }
 
   disableEnable() {
     if (this.agent != null) {
       this.agent.active = !this.agent.active;
     this.computeBackgroundColor();
+      this.reorder.emit(this.agent);
     }
   }
 
@@ -54,6 +53,7 @@ export class AgentVisualizeComponent implements OnInit, OnChanges {
     if (this.battle != null && this.index != null && this.index >= 0 && this.index < this.battle.actors.length
     && confirm('Do you really want to delete this Agent from the current Battle?')) {
       this.battle.actors.splice(this.index, 1);
+      this.reorder.emit(this.agent);
     }
   }
 
