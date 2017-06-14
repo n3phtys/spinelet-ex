@@ -7,11 +7,31 @@ import { PREMADE_AGENTS } from 'app/agent';
 @Injectable()
 export class BattleLibraryService {
 
+  static readonly BattleIndexLocalKey = 'SPINELETEX_BattleIndex';
+  static readonly BattleListLocalKey = 'SPINELETEX_BattleList';
+
   public battles: Battle[] = [];
   public openedIndex = (this.battles != null && this.battles.length > 0) ? 0 : -1;
   private openedIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.openedIndex);
 
   constructor() {
+    const value1 = localStorage.getItem(BattleLibraryService.BattleIndexLocalKey)
+    const value2 = localStorage.getItem(BattleLibraryService.BattleListLocalKey)
+    if (value2 != null) {
+      console.log('Loading battles from localStorage');
+      console.log(value2);
+      const list = Battle.fromJsonArray(value2);
+      console.log(list);
+      this.battles = list;
+      if (value1 != null) {
+      console.log('Loading index from localStorage');
+        const index = parseInt(value1, 10);
+      console.log(index);
+        this.openedIndex = index;
+        this.openedIndexSubject.next(index);
+      }
+    } else {
+      console.log('Loading Mock Battles');
     this.createNewBattleAndPrepend();
     this.createNewBattleAndPrepend();
     this.createNewBattleAndPrepend();
@@ -30,15 +50,20 @@ export class BattleLibraryService {
     this.battles[2].actors[4].initiative = 13;
     this.battles[2].actors[2].initiative = 4;
     this.battles[2].actors[0].initiative = 1;
+
+    }
    }
 
   public storeChangesOfBattle(index: number) {
       // TODO
+
+      localStorage.setItem(BattleLibraryService.BattleListLocalKey, JSON.stringify(this.battles));
   }
 
   public openIndex(index: number) {
     this.openedIndex = index;
     this.openedIndexSubject.next(index);
+    localStorage.setItem(BattleLibraryService.BattleIndexLocalKey, index.toString());
   }
 
   public openedIndexRx(): Observable<number> {
@@ -49,13 +74,17 @@ export class BattleLibraryService {
     const moveDown = index <= this.openedIndex;
     if (index >= 0 && this.battles != null && index < this.battles.length) {
       this.battles.splice(index, 1)
+      localStorage.setItem(BattleLibraryService.BattleListLocalKey, JSON.stringify(this.battles));
       if (moveDown) {
           this.openedIndex -= 1;
           if (this.openedIndex < 0 && this.battles != null && this.battles.length > 0) {
             this.openedIndex = 0;
           }
+          this.openedIndexSubject.next(index);
+          localStorage.setItem(BattleLibraryService.BattleIndexLocalKey, index.toString());
       }
     }
+      localStorage.setItem(BattleLibraryService.BattleListLocalKey, JSON.stringify(this.battles));
   }
 
   public createNewBattleAndPrepend() {

@@ -23,7 +23,9 @@ export class BattleVisualizeComponent implements OnInit {
 
     if (this.battleLibraryService.isOpened()) {
       this.sortedAgents = [];
+      if (this.battleLibraryService.getOpenBattle() != null) {
       this.battleLibraryService.getOpenBattle().actors.forEach(a => this.sortedAgents.push(a));
+      }
       this.sortedAgents.sort((a, b) => b.initiative -  a.initiative + 1)
     }
   }

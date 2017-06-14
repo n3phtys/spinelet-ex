@@ -187,6 +187,11 @@ export class Agent {
         }
     }
 
+    static fromJsonArray(json: string): Agent[] {
+        const cp: object[] = JSON.parse(json);
+        return cp.map(o => Object.setPrototypeOf(o, Agent.prototype));
+    }
+
     static fromJson(json: string): Agent {
         const cp = JSON.parse(json);
 return Object.setPrototypeOf(cp, Agent.prototype);

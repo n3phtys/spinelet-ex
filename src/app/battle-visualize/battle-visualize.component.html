@@ -1,4 +1,4 @@
-
+<div *ngIf="battleLibraryService.battles != null && battleLibraryService.battles[battleLibraryService.openedIndex] != null">
 <div class="panel-group">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -56,3 +56,5 @@
   [battle]="battleLibraryService.battles[battleLibraryService.openedIndex]" [index]="idx" 
   (reorder)="resort()" ></app-agent-visualize>
 </ul>
+
+</div>
