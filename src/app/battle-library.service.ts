@@ -15,6 +15,8 @@ export class BattleLibraryService {
   private openedIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.openedIndex);
 
   constructor() {
+    const usemock = false;
+
     const value1 = localStorage.getItem(BattleLibraryService.BattleIndexLocalKey)
     const value2 = localStorage.getItem(BattleLibraryService.BattleListLocalKey)
     if (value2 != null) {
@@ -31,6 +33,7 @@ export class BattleLibraryService {
         this.openedIndexSubject.next(index);
       }
     } else {
+      if (usemock) {
       console.log('Loading Mock Battles');
     this.createNewBattleAndPrepend();
     this.createNewBattleAndPrepend();
@@ -51,6 +54,12 @@ export class BattleLibraryService {
     this.battles[2].actors[2].initiative = 4;
     this.battles[2].actors[0].initiative = 1;
 
+  } else {
+    this.createNewBattleAndPrepend();
+    this.battles[0].title = 'My battle';
+    this.getOpenBattle().actors.push(PREMADE_AGENTS[3].clone());
+    this.storeChangesOfBattle(0);
+  }
     }
    }
 
@@ -84,7 +93,6 @@ export class BattleLibraryService {
           localStorage.setItem(BattleLibraryService.BattleIndexLocalKey, index.toString());
       }
     }
-      localStorage.setItem(BattleLibraryService.BattleListLocalKey, JSON.stringify(this.battles));
   }
 
   public createNewBattleAndPrepend() {
@@ -94,7 +102,7 @@ export class BattleLibraryService {
       this.battles = [new Battle()];
     }
     this.battles[0].title = 'New Battle';
-    if (this.openedIndex >= 0 && this.battles != null && this.openedIndex < this.battles.length) {
+    if (this.openedIndex >= 0 && this.battles != null && this.openedIndex < this.battles.length - 1) {
       this.openedIndex = this.openedIndex + 1;
     } else {
       this.openedIndex = 0;
