@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BattleSelectorComponent } from './battle-selector.component';
 import { BattleLibraryService } from 'app/battle-library.service';
+import { AgentLibraryService } from "app/agent-library.service";
 
 describe('BattleSelectorComponent', () => {
   let component: BattleSelectorComponent;
@@ -11,7 +12,8 @@ describe('BattleSelectorComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ BattleSelectorComponent ],
     providers: [
-      BattleLibraryService
+      BattleLibraryService,
+    AgentLibraryService
     ],
     })
     .compileComponents();

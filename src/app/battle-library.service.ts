@@ -11,7 +11,7 @@ export class BattleLibraryService {
   static readonly BattleListLocalKey = 'SPINELETEX_BattleList';
 
   public battles: Battle[] = [];
-  public openedIndex = (this.battles != null && this.battles.length > 0) ? 0 : -1;
+  public openedIndex: number = (this.battles != null && this.battles.length > 0) ? 0 : -1;
   private openedIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.openedIndex);
 
   constructor() {
@@ -121,4 +121,13 @@ export class BattleLibraryService {
     return this.openedIndexRx().map(i => this.battles != null && i >= 0 && i < this.battles.length);
   }
 
+
+
+
+
+  public import(imp: Battle[], impIndex: number) {
+    this.battles = imp;
+    this.storeChangesOfBattle(0);
+    this.openIndex(impIndex);
+  }
 }

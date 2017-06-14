@@ -32,4 +32,9 @@ export class AgentLibraryService {
 // TODO
   }
 
+  public import(imp: Agent[]) {
+    this.agentsInLibrary = imp;
+    localStorage.setItem(AgentLibraryService.AgentLibraryLocalKey, JSON.stringify(this.agentsInLibrary));
+  }
+
 }
