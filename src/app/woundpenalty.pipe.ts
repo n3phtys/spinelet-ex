@@ -9,7 +9,7 @@ export class WoundpenaltyPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     const agent = value as Agent;
 
-    let totalDamage = agent.damageAggravated + agent.damageLethal + agent.damageBashing;
+    let totalDamage = agent.damage;
     const hpZeroesLeft = Math.max(0, agent.hpWPZero - totalDamage);
     totalDamage = Math.max(0, totalDamage - agent.hpWPZero);
     const hpOnesLeft = Math.max(0, agent.hpWPOne - totalDamage);

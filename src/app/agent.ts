@@ -1,7 +1,6 @@
 import { AgentType } from 'app/agent-type.enum';
 import { Drill } from 'app/drill.enum';
 import { CustomCondition } from 'app/custom-condition';
-import { Damage } from 'app/damage.enum';
 
 export class Agent {
 
@@ -21,9 +20,7 @@ export class Agent {
 
 // do not forget the incapaticated last life
 
-    damageLethal: number;
-    damageBashing: number;
-    damageAggravated: number;
+    damage: number; // decided to go with one damage type
     type: AgentType = AgentType.Special;
     might: number;
     size: number;
@@ -55,9 +52,7 @@ export class Agent {
         entitity.hpWPOne = 0;
         entitity.hpWPTwo = 0;
         entitity.hpWPFour = 0;
-        entitity.damageAggravated = 0;
-        entitity.damageBashing = 0;
-        entitity.damageLethal = 0;
+        entitity.damage = 0;
         entitity.type = AgentType.Battlegroup;
         entitity.might = might;
         entitity.size = size;
@@ -88,9 +83,7 @@ export class Agent {
         entitity.hpWPOne = hpWPOne;
         entitity.hpWPTwo = hpWPTwo;
         entitity.hpWPFour = hpWPFour;
-        entitity.damageAggravated = 0;
-        entitity.damageBashing = 0;
-        entitity.damageLethal = 0;
+        entitity.damage = 0;
         entitity.type = AgentType.Weak;
         entitity.might = 0;
         entitity.size = 0;
@@ -121,9 +114,7 @@ export class Agent {
         entitity.hpWPOne = hpWPOne;
         entitity.hpWPTwo = hpWPTwo;
         entitity.hpWPFour = hpWPFour;
-        entitity.damageAggravated = 0;
-        entitity.damageBashing = 0;
-        entitity.damageLethal = 0;
+        entitity.damage = 0;
         entitity.type = AgentType.Strong;
         entitity.might = 0;
         entitity.size = 0;
@@ -153,9 +144,7 @@ export class Agent {
         entitity.hpWPOne = hpWPOne;
         entitity.hpWPTwo = hpWPTwo;
         entitity.hpWPFour = hpWPFour;
-        entitity.damageAggravated = 0;
-        entitity.damageBashing = 0;
-        entitity.damageLethal = 0;
+        entitity.damage = 0;
         entitity.type = AgentType.Special;
         entitity.might = 0;
         entitity.size = 0;
@@ -220,28 +209,48 @@ return Object.setPrototypeOf(cp, Agent.prototype);
 
     }
 
+    getTotalHealth(): number {
+        return this.hpWPFour + this.hpWPTwo + this.hpWPOne + this.hpWPZero + 1;
+    }
+
     takeWitheringDamage(d: number) {
     switch (this.type) {
             case AgentType.Battlegroup: {
+                let remaining: number = d;
+                while (remaining > 0) {
+                    const delta = Math.min(this.magnitude, remaining);
+                    this.magnitude -= delta;
+                    if (this.size === 0 && this.magnitude === 0) {
+                        break;
+                    }
+                    if (this.magnitude === 0) {
+                        this.size -= 1;
+                        this.magnitude = this.size + this.getTotalHealth();
+                    }
 
+                    remaining -= delta;
+                    this.damage += delta;
+                }
                 break;
             }
             case AgentType.Weak: {
-
+                const delta = Math.min( this.getTotalHealth() - this.damage, d);
+                this.damage += delta;
                 break;
             }
             case AgentType.Strong: {
-
+                const delta = Math.min( this.getTotalHealth() - this.damage, d);
+                this.damage += delta;
                 break;
             }
             case AgentType.Special: {
-
+                this.initiative -= d;
                 break;
             }
         }
     }
 
-    takeDecisiveDamage(d: number, level: Damage) {
+    takeDecisiveDamage(d: number) {
         switch (this.type) {
             case AgentType.Battlegroup: {
 

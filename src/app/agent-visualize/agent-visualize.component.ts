@@ -87,6 +87,14 @@ export class AgentVisualizeComponent implements OnInit, OnChanges {
     }
   }
 
+  takeWithering() {
+    const value = prompt('Please to how much withering damage was taken', '1');
+    if (value != null && this.agent != null) {
+      this.agent.takeWitheringDamage(parseInt(value, 10));
+      this.reorder.emit(this.agent);
+    }
+  }
+
   addCondition() {
     const txt = prompt('Add a new condition / note to ' + this.agent.title);
     if (txt != null && txt.trim().length > 0) {
