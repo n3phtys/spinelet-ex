@@ -30,7 +30,7 @@
   </div>
 
     <div *ngIf="agent.type!=1">
-    <div>Remaining Health: {{agent.hpWPZero + agent.hpWPOne + agent.hpWPTwo + agent.hpWPFour + 1 - agent.damageLethal - agent.damageBashing - agent.damageAggravated}} / {{agent.hpWPZero + agent.hpWPOne + agent.hpWPTwo + agent.hpWPFour + 1}}</div>
+    <div>Remaining Health: {{agent.hpWPZero + agent.hpWPOne + agent.hpWPTwo + agent.hpWPFour + 1 - agent.damage}} / {{agent.hpWPZero + agent.hpWPOne + agent.hpWPTwo + agent.hpWPFour + 1}}</div>
     <div>Wound Penalty: {{agent | woundpenalty}}</div>
 
     </div>
@@ -45,7 +45,7 @@
       </div>
 
       <div>
-        <label> Magnitude: {{agent.magnitude - agent.damageLethal - agent.damageBashing - agent.damageAggravated}} / {{agent.magnitude}}  (Size {{agent.size}})</label>
+        <label> Magnitude: {{agent.magnitude - agent.damage}} / {{agent.magnitude}}  (Size {{agent.size}})</label>
       </div>
     </div>
 <hr>    
@@ -57,8 +57,8 @@
 <button (click)="takeWithering()">Take Withering Damage</button>
 
 
-<button disabled>Take Decisive Damage</button>
-<button disabled>Heal Damage</button>
+<button (click)="takeDecisive()">Take Decisive Damage</button>
+<button (click)="healDamage()">Heal Damage</button>
 <button (click)="addCondition()">Add Custom Condition</button>
 <button (click)="disableEnable()">Dis-/Enable</button>
 <button (click)="remove()">Remove</button>

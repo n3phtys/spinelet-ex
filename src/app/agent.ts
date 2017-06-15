@@ -25,7 +25,7 @@ export class Agent {
     might: number;
     size: number;
     drill: Drill = Drill.Average;
-    magnitude: number;
+    magnitude: number; // total health points (only change if size changes)
     hasActedThisRound: boolean;
     active: boolean;
     conditions: CustomCondition[];
@@ -218,18 +218,17 @@ return Object.setPrototypeOf(cp, Agent.prototype);
             case AgentType.Battlegroup: {
                 let remaining: number = d;
                 while (remaining > 0) {
-                    const delta = Math.min(this.magnitude, remaining);
-                    this.magnitude -= delta;
-                    if (this.size === 0 && this.magnitude === 0) {
+                    const delta = Math.min(this.magnitude - this.damage, remaining);
+                    this.damage += delta;
+                    if (this.size === 0 && this.magnitude === this.damage) {
                         break;
                     }
-                    if (this.magnitude === 0) {
+                    if (this.magnitude === this.damage) {
                         this.size -= 1;
                         this.magnitude = this.size + this.getTotalHealth();
+                        this.damage = 0;
                     }
-
                     remaining -= delta;
-                    this.damage += delta;
                 }
                 break;
             }
@@ -253,21 +252,61 @@ return Object.setPrototypeOf(cp, Agent.prototype);
     takeDecisiveDamage(d: number) {
         switch (this.type) {
             case AgentType.Battlegroup: {
-
+                let remaining: number = d;
+                while (remaining > 0) {
+                    const delta = Math.min(this.magnitude - this.damage, remaining);
+                    this.damage += delta;
+                    if (this.size === 0 && this.magnitude === this.damage) {
+                        break;
+                    }
+                    if (this.magnitude === this.damage) {
+                        this.size -= 1;
+                        this.magnitude = this.size + this.getTotalHealth();
+                        this.damage = 0;
+                    }
+                    remaining -= delta;
+                }
                 break;
             }
             case AgentType.Weak: {
-
+                const delta = Math.min( this.getTotalHealth() - this.damage, d);
+                this.damage += delta;
                 break;
             }
             case AgentType.Strong: {
-
+                const delta = Math.min( this.getTotalHealth() - this.damage, d);
+                this.damage += delta;
                 break;
             }
             case AgentType.Special: {
 
+                const delta = Math.min( this.getTotalHealth() - this.damage, d);
+                this.damage += delta;
                 break;
             }
+        }
+    }
+
+    healDamage(d: number) {
+        switch (this.type) {
+            case AgentType.Battlegroup: {
+                let remaining: number = d;
+                while (remaining > 0) {
+                    const delta = Math.min(this.damage, remaining);
+                    this.damage -= delta;
+                    if (this.damage === 0 && remaining > 0) {
+                        this.size += 1;
+                        this.magnitude = this.getTotalHealth() + this.size;
+                        this.damage = this.magnitude;
+                    }
+                    remaining -= delta;
+                }
+            break;
+        }
+        default: {
+                const delta = Math.min( this.damage, d);
+                this.damage -= delta;
+        }
         }
     }
 

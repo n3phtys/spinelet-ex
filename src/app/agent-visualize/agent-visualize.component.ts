@@ -95,6 +95,22 @@ export class AgentVisualizeComponent implements OnInit, OnChanges {
     }
   }
 
+  takeDecisive() {
+    const value = prompt('Please to how much decisive damage was taken', '1');
+    if (value != null && this.agent != null) {
+      this.agent.takeDecisiveDamage(parseInt(value, 10));
+      this.reorder.emit(this.agent);
+    }
+  }
+
+  healDamage() {
+    const value = prompt('Please to how much damage / magnitude loss was healed', '1');
+    if (value != null && this.agent != null) {
+      this.agent.healDamage(parseInt(value, 10));
+      this.reorder.emit(this.agent);
+    }
+  }
+
   addCondition() {
     const txt = prompt('Add a new condition / note to ' + this.agent.title);
     if (txt != null && txt.trim().length > 0) {
