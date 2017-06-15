@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Outpu
 import { Agent } from 'app/agent';
 import { Battle } from 'app/battle';
 import { Drill } from 'app/drill.enum';
+import { CustomCondition } from "app/custom-condition";
 
 @Component({
   selector: 'app-agent-visualize',
@@ -83,6 +84,22 @@ export class AgentVisualizeComponent implements OnInit, OnChanges {
     if (value != null && this.agent != null) {
       this.agent.setInitiative(parseInt(value, 10));
       this.reorder.emit(this.agent);
+    }
+  }
+
+  addCondition() {
+    const txt = prompt('Add a new condition / note to ' + this.agent.title);
+    if (txt != null && txt.trim().length > 0) {
+      this.agent.conditions.push(new CustomCondition(txt.trim()));
+      this.reorder.next(this.agent)
+    }
+  }
+
+  removeCondition(index: number) {
+    if (confirm('Do you really want to delete: ' + this.agent.conditions[index].title + ' ?')) {
+      console.log('Deleting Index: ' + index);
+      console.log(this.agent.conditions.splice(index, 1));
+      this.reorder.next(this.agent)
     }
   }
 

@@ -59,18 +59,20 @@
 
 <button disabled>Take Decisive Damage</button>
 <button disabled>Heal Damage</button>
-<button disabled>Add Custom Condition</button>
+<button (click)="addCondition()">Add Custom Condition</button>
 <button (click)="disableEnable()">Dis-/Enable</button>
 <button (click)="remove()">Remove</button>
 
 
     <div *ngIf="agent.conditions.length  > 0">
 <hr>
+  <div >
     <label>Conditions:</label>
-    <ul>
-      <li *ngFor="let condition of agent.conditions; let cidx = index">{{condition}}</li>
+    <ul style="text-align: left">
+      <li *ngFor="let condition of agent.conditions; let cidx = index">
+        <button (click)="removeCondition(cidx)"><span class="glyphicon glyphicon-trash"></span></button> {{condition.title}} </li>
     </ul>
     </div>
-
+    </div>
 </div>
 </li>
