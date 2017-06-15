@@ -20,7 +20,7 @@ export class BattleSelectorComponent implements OnInit {
 
 
   delete(idx: number) {
-    if (confirm('Do you really want to delete ' + this.battleLibraryService.battles[idx].title + ' permanently?')) {
+    if (confirm('Do you really want to delete ' + this.battleLibraryService.getBattles()[idx].title + ' permanently?')) {
       this.battleLibraryService.deleteBattleAndSelectNextOne(idx);
     }
   }
@@ -68,7 +68,7 @@ export class BattleSelectorComponent implements OnInit {
 
   makeExportLink() {
       const exp = new Export(this.agentLibraryService.agentsInLibrary,
-      this.battleLibraryService.battles, this.battleLibraryService.openedIndex);
+      this.battleLibraryService.getBattles(), this.battleLibraryService.getIndex());
       const filename: string = 'export' + new Date().toISOString() + '.json';
       const filecontent: string = JSON.stringify(exp);
       this.setOutputCSVLink(filename, filecontent);

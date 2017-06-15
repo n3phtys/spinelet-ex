@@ -10,11 +10,22 @@ export class BattleLibraryService {
   static readonly BattleIndexLocalKey = 'SPINELETEX_BattleIndex';
   static readonly BattleListLocalKey = 'SPINELETEX_BattleList';
 
-  public battles: Battle[] = [];
-  public openedIndex: number = (this.battles != null && this.battles.length > 0) ? 0 : -1;
+  private battles: Battle[] = [];
+  private openedIndex: number = (this.battles != null && this.battles.length > 0) ? 0 : -1;
   private openedIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.openedIndex);
+  public battle: Battle = null;
+
+  public battleRx = this.openedIndexSubject.asObservable().map(i => {
+    if (i >= 0 && i < this.battles.length) {
+      return this.battles[i];
+    } else {
+      return null;
+    }
+  }).share();
 
   constructor() {
+    this.battleRx.subscribe(b => this.battle = b)
+
     const usemock = false;
 
     const value1 = localStorage.getItem(BattleLibraryService.BattleIndexLocalKey)
@@ -79,6 +90,15 @@ export class BattleLibraryService {
     return this.openedIndexSubject;
   }
 
+  public getIndex(): number {
+    return this.openedIndex;
+  }
+
+  public getBattles(): Battle[] {
+    return this.battles;
+  }
+
+
   public deleteBattleAndSelectNextOne(index: number) {
     const moveDown = index <= this.openedIndex;
     if (index >= 0 && this.battles != null && index < this.battles.length) {
@@ -107,6 +127,7 @@ export class BattleLibraryService {
     } else {
       this.openedIndex = 0;
     }
+    localStorage.setItem(BattleLibraryService.BattleListLocalKey, JSON.stringify(this.battles));
   }
 
   public isOpened() {

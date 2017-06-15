@@ -18,8 +18,10 @@ export class BattleVisualizeComponent implements OnInit {
     // store once every 10s
     this.battleStoring.sampleTime(1000).subscribe(a => {
       console.log('Debounced Storing Triggered');
-      this.battleLibraryService.storeChangesOfBattle(this.battleLibraryService.openedIndex);
+      this.battleLibraryService.storeChangesOfBattle(this.battleLibraryService.getIndex());
     });
+
+    this.battleLibraryService.battleRx.subscribe(b => this.resort());
   }
 
   ngOnInit() {
