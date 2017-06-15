@@ -10,7 +10,7 @@ export class BattleLibraryService {
   static readonly BattleIndexLocalKey = 'SPINELETEX_BattleIndex';
   static readonly BattleListLocalKey = 'SPINELETEX_BattleList';
 
-  private battles: Battle[] = [];
+  public battles: Battle[] = [];
   private openedIndex: number = (this.battles != null && this.battles.length > 0) ? 0 : -1;
   private openedIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.openedIndex);
   public battle: Battle = null;
