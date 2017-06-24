@@ -10,21 +10,16 @@ export class BattleLibraryService {
   static readonly BattleIndexLocalKey = 'SPINELETEX_BattleIndex';
   static readonly BattleListLocalKey = 'SPINELETEX_BattleList';
 
-  public battles: Battle[] = [];
+  private battles: Battle[] = [];
   private openedIndex: number = (this.battles != null && this.battles.length > 0) ? 0 : -1;
   private openedIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.openedIndex);
-  public battle: Battle = null;
+  private totalBattlesSubject: BehaviorSubject<Battle[]>;
+  private battle: Battle = null;
 
-  public battleRx = this.openedIndexSubject.asObservable().map(i => {
-    if (i >= 0 && i < this.battles.length) {
-      return this.battles[i];
-    } else {
-      return null;
-    }
-  }).share();
+  public battleRx: Observable<Battle>;
+  public battlesRx: Observable<Battle[]>;
 
   constructor() {
-    this.battleRx.subscribe(b => this.battle = b)
 
     const usemock = false;
 
@@ -72,12 +67,21 @@ export class BattleLibraryService {
     this.storeChangesOfBattle(0);
   }
     }
+
+this.totalBattlesSubject = new BehaviorSubject<Battle[]>(this.battles);
+
+this.battleRx = this.totalBattlesSubject.flatMap(b => this.openedIndexSubject.asObservable()
+.map(i => i >= 0 && i < b.length ? b[i] : null)).share();
+    this.battleRx.subscribe(b => this.battle = b);
+
+this.battlesRx = this.totalBattlesSubject.asObservable();
    }
 
   public storeChangesOfBattle(index: number) {
       // TODO
 
       localStorage.setItem(BattleLibraryService.BattleListLocalKey, JSON.stringify(this.battles));
+      // this.totalBattlesSubject.next(this.battles);
   }
 
   public openIndex(index: number) {
@@ -112,6 +116,7 @@ export class BattleLibraryService {
           this.openedIndexSubject.next(index);
           localStorage.setItem(BattleLibraryService.BattleIndexLocalKey, index.toString());
       }
+      this.totalBattlesSubject.next(this.battles);
     }
   }
 
@@ -128,6 +133,7 @@ export class BattleLibraryService {
       this.openedIndex = 0;
     }
     localStorage.setItem(BattleLibraryService.BattleListLocalKey, JSON.stringify(this.battles));
+    this.totalBattlesSubject.next(this.battles);
   }
 
   public isOpened() {

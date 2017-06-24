@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BattleLibraryService } from 'app/battle-library.service';
 import { Export } from 'app/export';
 import { AgentLibraryService } from 'app/agent-library.service';
+import { Battle } from 'app/battle';
 
 @Component({
   selector: 'app-battle-selector',
@@ -10,9 +11,12 @@ import { AgentLibraryService } from 'app/agent-library.service';
 })
 export class BattleSelectorComponent implements OnInit {
 
+  private battles: Battle[] = null;
+  private index: number = null;
+
   constructor(public battleLibraryService: BattleLibraryService,
     public agentLibraryService: AgentLibraryService) {
-
+      this.battleLibraryService.battlesRx.subscribe(b => this.battles = b);
   }
 
   ngOnInit() {

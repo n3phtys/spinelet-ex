@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BattleLibraryService } from 'app/battle-library.service';
 import { Agent } from 'app/agent';
 import { Subject } from 'rxjs/Rx';
+import { Battle } from "app/battle";
 
 @Component({
   selector: 'app-battle-visualize',
@@ -13,6 +14,8 @@ export class BattleVisualizeComponent implements OnInit {
   public sortedAgents: Agent[] = null;
   private battleStoring: Subject<boolean> = new Subject<boolean>();
 
+  private battle: Battle = null;
+
 
   constructor(public battleLibraryService: BattleLibraryService) {
     // store once every 10s
@@ -21,7 +24,10 @@ export class BattleVisualizeComponent implements OnInit {
       this.battleLibraryService.storeChangesOfBattle(this.battleLibraryService.getIndex());
     });
 
-    this.battleLibraryService.battleRx.subscribe(b => this.resort());
+    this.battleLibraryService.battleRx.subscribe(b => {
+      this.battle = b;
+      this.resort()
+    });
   }
 
   ngOnInit() {
