@@ -14,6 +14,10 @@ import { AgentLibraryService } from 'app/agent-library.service';
 import { EnumPipePipe } from './enum-pipe.pipe';
 import { WoundpenaltyPipe } from './woundpenalty.pipe';
 import { SortbyinitiativePipe } from './sortbyinitiative.pipe';
+import { DataExporterComponent } from './data-exporter/data-exporter.component';
+import { ActorVisualizerComponent } from './actor-visualizer/actor-visualizer.component';
+import { BattleCenterComponent } from './battle-center/battle-center.component';
+import { TemplateLibraryComponent } from './template-library/template-library.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { SortbyinitiativePipe } from './sortbyinitiative.pipe';
     AgentCreatorComponent,
     EnumPipePipe,
     WoundpenaltyPipe,
-    SortbyinitiativePipe
+    SortbyinitiativePipe,
+    DataExporterComponent,
+    ActorVisualizerComponent,
+    BattleCenterComponent,
+    TemplateLibraryComponent
   ],
   imports: [
     BrowserModule,
