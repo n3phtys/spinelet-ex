@@ -1,8 +1,10 @@
 import { AgentType } from 'app/agent-type.enum';
 import { Drill } from 'app/drill.enum';
 import { CustomCondition } from 'app/custom-condition';
+import { Woundable } from "app/woundable";
 
-export class Agent {
+export class Agent implements Woundable {
+    public woundpenalty: number;
 
     title: string;
     description: string;
@@ -186,6 +188,47 @@ export class Agent {
 return Object.setPrototypeOf(cp, Agent.prototype);
     }
 
+    getHpOne(): number {
+        return this.hpWPOne;
+    }
+    getHPZero(): number {
+        return this.hpWPZero;
+    }
+    getHPTwo(): number {
+        return this.hpWPTwo;
+    }
+    getHPFour(): number {
+        return this.hpWPFour;
+    }
+    calculateWoundPenalty(): number {
+
+    let totalDamage = this.damage;
+    const hpZeroesLeft = Math.max(0, this.getHPZero() - totalDamage);
+    totalDamage = Math.max(0, totalDamage - this.getHPZero());
+    const hpOnesLeft = Math.max(0, this.getHpOne() - totalDamage);
+    totalDamage = Math.max(0, totalDamage - this.getHpOne());
+    const hpTwosLeft = Math.max(0, this.getHPTwo() - totalDamage);
+    totalDamage = Math.max(0, totalDamage - this.getHPTwo());
+    const hpFoursLeft = Math.max(0, this.getHPFour() - totalDamage);
+    totalDamage = Math.max(0, totalDamage - this.getHPFour());
+    const hpIncLeft = Math.max(0, 1 - totalDamage);
+
+    let result = 0;
+    if (hpIncLeft < 1) {
+      result = -8;
+    } else if (hpFoursLeft < this.getHPFour()) {
+      result = -4;
+    } else if (hpTwosLeft < this.getHPTwo()) {
+      result = -2;
+    } else if (hpOnesLeft < this.getHpOne()) {
+      result = -1;
+    } else {
+      result = 0;
+    }
+    this.woundpenalty = result;
+    return result;
+
+}
 
     public decreaseInitiative(d: number) {
         // TODO: implement more

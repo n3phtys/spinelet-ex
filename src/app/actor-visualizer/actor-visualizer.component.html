@@ -1,3 +1,78 @@
-<p>
-  actor-visualizer works!
-</p>
+<li class="agent-visualize-container" >
+  <div *ngIf="actor"  [ngStyle]="{ 'background-color': actor.background_color }" >
+
+
+<div style="display:table-cell; vertical-align:middle; text-align:center; width: 220px; height: 120px;">
+      <img [src]="actor.underlyingTemplate.avatarUrl" 
+       style="width: inherit;">
+</div>
+
+
+
+<div>
+
+<div class="numberCircle">{{actor.initiative}}</div>
+<div *ngIf="actor.underlyingTemplate.type==1" class="symbolBG"><span class="glyphicon glyphicon-th"></span></div>
+<div *ngIf="actor.underlyingTemplate.type==2" class="symbolWeak"><span class="glyphicon glyphicon-pawn"></span></div>
+<div *ngIf="actor.underlyingTemplate.type==4" class="symbolStrong"><span class="glyphicon glyphicon-knight"></span></div>
+<div *ngIf="actor.underlyingTemplate.type==6" class="symbolSpecial"><span class="glyphicon glyphicon-queen"></span></div>
+
+
+    <h4>{{actor.underlyingTemplate.title}}</h4>
+
+    <div class="description">{{actor.underlyingTemplate.description}}</div>
+    <label> Parry: {{actor.underlyingTemplate.parryDV}} / Evasion: {{actor.underlyingTemplate.evasionDV}} </label>
+    <label> Soak: {{actor.underlyingTemplate.soak}} / Hardness: {{actor.underlyingTemplate.hardness}} </label>
+    
+
+
+
+  </div>
+
+    <div *ngIf="actor.underlyingTemplate.type!=1">
+    <div>Remaining Health: {{actor.underlyingTemplate.hpWPZero + actor.underlyingTemplate.hpWPOne + actor.underlyingTemplate.hpWPTwo + actor.underlyingTemplate.hpWPFour + 1 - actor.damage}} / {{actor.underlyingTemplate.hpWPZero + actor.underlyingTemplate.hpWPOne + actor.underlyingTemplate.hpWPTwo + actor.underlyingTemplate.hpWPFour + 1}}</div>
+    <div>Wound Penalty: {{actor.woundpenalty}}</div>
+
+    </div>
+    
+
+    <div *ngIf="actor.underlyingTemplate.type==1">
+    <div>
+      Might: {{actor.underlyingTemplate.might}}
+      </div>
+      <div>
+    Drill: {{ Drill[actor.underlyingTemplate.drill]}}
+      </div>
+
+      <div>
+        <label> Magnitude: {{actor.magnitude - actor.damage}} / {{actor.magnitude}}  (Size {{actor.activeSize}})</label>
+      </div>
+    </div>
+<hr>    
+
+<button (click)="commitAction()">Action this round</button>
+<button (click)="setInitiative()">Set Initiative</button>
+<button (click)="plusInitiative()">Increase Initiative</button>
+<button (click)="minusInitiative()">Decrease Initiative</button>
+<button (click)="takeWithering()">Take Withering Damage</button>
+
+
+<button (click)="takeDecisive()">Take Decisive Damage</button>
+<button (click)="healDamage()">Heal Damage</button>
+<button (click)="addCondition()">Add Custom Condition</button>
+<button (click)="disableEnable()">Dis-/Enable</button>
+<button (click)="remove()">Remove</button>
+
+
+    <div *ngIf="actor.conditions.length  > 0">
+<hr>
+  <div >
+    <label>Conditions:</label>
+    <ul style="text-align: left">
+      <li *ngFor="let condition of actor.conditions; let cidx = index">
+        <button (click)="removeCondition(cidx)"><span class="glyphicon glyphicon-trash"></span></button> {{condition.title}} </li>
+    </ul>
+    </div>
+    </div>
+</div>
+</li>
