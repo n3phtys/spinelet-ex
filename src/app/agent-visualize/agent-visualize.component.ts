@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Outpu
 import { Agent } from 'app/agent';
 import { Battle } from 'app/battle';
 import { Drill } from 'app/drill.enum';
-import { CustomCondition } from "app/custom-condition";
+import { CustomCondition } from 'app/custom-condition';
 
 @Component({
   selector: 'app-agent-visualize',

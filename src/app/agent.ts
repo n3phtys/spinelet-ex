@@ -202,13 +202,6 @@ return Object.setPrototypeOf(cp, Agent.prototype);
         this.initiative = i;
     }
 
-    increaseSize(d: number) {
-
-    }
-    decreaseSize(d: number) {
-
-    }
-
     getTotalHealth(): number {
         return this.hpWPFour + this.hpWPTwo + this.hpWPOne + this.hpWPZero + 1;
     }
