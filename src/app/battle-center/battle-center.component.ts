@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BattleCenterService } from 'app/battle-center.service';
 
 @Component({
   selector: 'app-battle-center',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BattleCenterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private battleCenterService: BattleCenterService) { }
 
   ngOnInit() {
   }

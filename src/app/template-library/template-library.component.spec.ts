@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TemplateLibraryComponent } from './template-library.component';
+import { TemplateLibraryService } from "app/template-library.service";
 
 describe('TemplateLibraryComponent', () => {
   let component: TemplateLibraryComponent;
@@ -8,7 +9,10 @@ describe('TemplateLibraryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TemplateLibraryComponent ]
+      declarations: [ TemplateLibraryComponent ],
+    providers: [
+    TemplateLibraryService
+    ],
     })
     .compileComponents();
   }));

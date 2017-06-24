@@ -1,3 +1,13 @@
-<p>
-  data-exporter works!
-</p>
+<div>
+<div>
+<button (click)="makeExportLink()">Make Export Download Link</button>
+<a id="exportLinkAnchor" href="google.com" download hidden>
+  Download  as JSON-file
+</a>
+</div>
+<div>
+Import file:
+<input type="file" (change)="importFileChangeEvent($event)">
+
+</div>
+</div>

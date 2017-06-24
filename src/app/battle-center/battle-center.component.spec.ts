@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BattleCenterComponent } from './battle-center.component';
+import { BattleCenterService } from "app/battle-center.service";
 
 describe('BattleCenterComponent', () => {
   let component: BattleCenterComponent;
@@ -8,7 +9,10 @@ describe('BattleCenterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BattleCenterComponent ]
+      declarations: [ BattleCenterComponent ],
+    providers: [
+    BattleCenterService
+    ],
     })
     .compileComponents();
   }));
