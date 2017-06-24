@@ -12,7 +12,7 @@ export class BattleLibraryService {
 
   private battles: Battle[] = [];
   private openedIndex: number = (this.battles != null && this.battles.length > 0) ? 0 : -1;
-  private openedIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(this.openedIndex);
+  private openedIndexSubject: BehaviorSubject<number>;
   private totalBattlesSubject: BehaviorSubject<Battle[]>;
   private battle: Battle = null;
 
@@ -20,6 +20,7 @@ export class BattleLibraryService {
   public battlesRx: Observable<Battle[]>;
 
   constructor() {
+    this.openedIndexSubject = new BehaviorSubject<number>(this.openedIndex);
 
     const usemock = false;
 
@@ -38,8 +39,18 @@ export class BattleLibraryService {
         this.openedIndex = index;
         this.openedIndexSubject.next(index);
       }
-    } else {
-      if (usemock) {
+    }
+this.totalBattlesSubject = new BehaviorSubject<Battle[]>(this.battles);
+
+this.battleRx = this.totalBattlesSubject.flatMap(b => this.openedIndexSubject.asObservable()
+.map(i => i >= 0 && i < b.length ? b[i] : null)).share();
+    this.battleRx.subscribe(b => this.battle = b);
+
+this.battlesRx = this.totalBattlesSubject.asObservable();
+
+
+if (value2 == null) {
+  if (usemock) {
       console.log('Loading Mock Battles');
     this.createNewBattleAndPrepend();
     this.createNewBattleAndPrepend();
@@ -66,22 +77,15 @@ export class BattleLibraryService {
     this.getOpenBattle().actors.push(PREMADE_AGENTS[3].clone());
     this.storeChangesOfBattle(0);
   }
-    }
+}
 
-this.totalBattlesSubject = new BehaviorSubject<Battle[]>(this.battles);
 
-this.battleRx = this.totalBattlesSubject.flatMap(b => this.openedIndexSubject.asObservable()
-.map(i => i >= 0 && i < b.length ? b[i] : null)).share();
-    this.battleRx.subscribe(b => this.battle = b);
-
-this.battlesRx = this.totalBattlesSubject.asObservable();
    }
 
   public storeChangesOfBattle(index: number) {
       // TODO
 
       localStorage.setItem(BattleLibraryService.BattleListLocalKey, JSON.stringify(this.battles));
-      // this.totalBattlesSubject.next(this.battles);
   }
 
   public openIndex(index: number) {
