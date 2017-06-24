@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { TemplateLibraryService } from "app/template-library.service";
+import { TemplateLibraryService } from 'app/template-library.service';
 
 @Component({
   selector: 'app-template-library',

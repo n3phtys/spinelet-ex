@@ -1,16 +1,15 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Actor } from 'app/actor';
 import { Drill } from 'app/drill.enum';
-import {InterComponentInteraction} from 'app/inter-component-interaction.enum'
-import { CustomCondition } from "app/custom-condition";
+import { InterComponentInteraction } from 'app/inter-component-interaction.enum'
+import { CustomCondition } from 'app/custom-condition';
 
 @Component({
   selector: 'app-actor-visualizer',
   templateUrl: './actor-visualizer.component.html',
   styleUrls: ['./actor-visualizer.component.css']
 })
-export class ActorVisualizerComponent implements OnInit {
-
+export class ActorVisualizerComponent implements OnInit, OnChanges {
   public Drill = Drill;
 
   @Input() actor: Actor = null;
@@ -23,6 +22,15 @@ export class ActorVisualizerComponent implements OnInit {
 
   ngOnInit() {
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['battleChange'].currentValue !== changes['battleChange'].previousValue &&
+    changes['battleChange'].currentValue === InterComponentInteraction.RoundRefreshed) {
+      if (this.actor != null) {
+        this.actor.resetAction();
+      }
+    }
+  }
+
 
 
 
