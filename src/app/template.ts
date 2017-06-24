@@ -1,7 +1,8 @@
 import { AgentType } from 'app/agent-type.enum';
 import { Drill } from "app/drill.enum";
+import { DirtyCheckable } from "app/dirty-checkable";
 
-export class Template {
+export class Template implements DirtyCheckable {
     public hpWPFour: number;
     public type: AgentType;
     public hpWPTwo: number;
@@ -26,5 +27,15 @@ export class Template {
 
     constructor(title: string) {
         this.title = title;
+    }
+
+    markDirty(): void {
+        throw new Error("Method not implemented.");
+    }
+    markConsistent(): void {
+        throw new Error("Method not implemented.");
+    }
+    clone() {
+        throw new Error("Method not implemented.");
     }
 }

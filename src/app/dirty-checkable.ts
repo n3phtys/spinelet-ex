@@ -1,5 +1,7 @@
 export interface DirtyCheckable {
-    markDirty();
+    markDirty(): void;
 
-    markConsistent();
+    markConsistent(): void;
+
+    clone(): any;
 }

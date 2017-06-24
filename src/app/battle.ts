@@ -1,6 +1,7 @@
 import { Agent } from 'app/agent';
+import { DirtyCheckable } from "app/dirty-checkable";
 
-export class Battle {
+export class Battle implements DirtyCheckable {
     actors: Agent[] = [];
     // tslint:disable-next-line:no-inferrable-types
     round: number = 0;
@@ -40,5 +41,16 @@ export class Battle {
 
     clone(): Battle {
         return Battle.fromJson(this.toJson());
+    }
+
+    markDirty(): void {
+        throw new Error("Method not implemented.");
+    }
+    markConsistent(): void {
+        throw new Error("Method not implemented.");
+    }
+
+    sortInitiative() {
+        this.actors.sort((a, b) => b.initiative - a.initiative); // TODO: not yet integrated
     }
 }
