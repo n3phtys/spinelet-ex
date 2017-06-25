@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TemplateLibraryComponent } from './template-library.component';
-import { TemplateLibraryService } from "app/template-library.service";
+import { TemplateLibraryService } from 'app/template-library.service';
+import { FormsModule } from '@angular/forms';
+import { EnumPipePipe } from 'app/enum-pipe.pipe';
 
 describe('TemplateLibraryComponent', () => {
   let component: TemplateLibraryComponent;
@@ -9,7 +11,11 @@ describe('TemplateLibraryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TemplateLibraryComponent ],
+      imports: [
+        FormsModule
+      ],
+      declarations: [ TemplateLibraryComponent,
+    EnumPipePipe, ],
     providers: [
     TemplateLibraryService
     ],

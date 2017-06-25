@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BattleCenterService } from 'app/battle-center.service';
 import { InterComponentInteraction } from 'app/inter-component-interaction.enum';
+import { Template } from "app/template";
 
 @Component({
   selector: 'app-battle-center',
@@ -22,7 +23,7 @@ export class BattleCenterComponent implements OnInit {
   }
 
 
-  templateLibraryChangeEvent(templateId: number) {
+  templateLibraryChangeEvent(template: Template) {
     // TODO
   }
 }

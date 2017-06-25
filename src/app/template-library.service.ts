@@ -8,10 +8,16 @@ import { Template } from 'app/template';
 @Injectable()
 export class TemplateLibraryService extends DirtyCheckService<Template>  implements ExportFillable {
   entityFromJson(json: string): Template {
-    throw new Error('Method not implemented.');
+    const t = JSON.parse(json) as Template;
+    Object.setPrototypeOf(t, Template.prototype);
+    return t;
   }
   entityArrayFromJson(json: string): Template[] {
-    throw new Error('Method not implemented.');
+    const t = JSON.parse(json) as Template[];
+    for (const x of t) {
+      Object.setPrototypeOf(x, Template.prototype);
+    }
+    return t;
   }
   import(importContent: Export): void {
     throw new Error('Method not implemented.');

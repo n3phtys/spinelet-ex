@@ -1,28 +1,29 @@
 import { AgentType } from 'app/agent-type.enum';
-import { Drill } from "app/drill.enum";
-import { DirtyCheckable } from "app/dirty-checkable";
+import { Drill } from 'app/drill.enum';
+import { DirtyCheckable } from 'app/dirty-checkable';
 
 export class Template implements DirtyCheckable {
-    public hpWPFour: number;
     public type: AgentType;
-    public hpWPTwo: number;
     public hpWPZero: number;
     public hpWPOne: number;
+    public hpWPTwo: number;
+    public hpWPFour: number;
+// do not forget the incapaticated last life
+
     public title: string;
     description: string;
-    // tslint:disable-next-line:no-inferrable-types
-    avatarUrl: string = 'https://i.imgur.com/62u4HpI.png';
+    avatarUrl: string;
     parryDV: number;
     evasionDV: number;
     soak: number;
     hardness: number;
 
-// do not forget the incapaticated last life
 
     damage: number; // decided to go with one damage type
     originalSize: number;
     drill: Drill = Drill.Average;
 
+    dirtyBit: boolean;
 
 
     constructor(title: string) {
@@ -30,12 +31,9 @@ export class Template implements DirtyCheckable {
     }
 
     markDirty(): void {
-        throw new Error("Method not implemented.");
+        this.dirtyBit = true;
     }
     markConsistent(): void {
-        throw new Error("Method not implemented.");
-    }
-    clone() {
-        throw new Error("Method not implemented.");
+        this.dirtyBit = true;
     }
 }

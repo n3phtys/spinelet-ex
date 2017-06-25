@@ -18,6 +18,8 @@ import { DataExporterComponent } from './data-exporter/data-exporter.component';
 import { ActorVisualizerComponent } from './actor-visualizer/actor-visualizer.component';
 import { BattleCenterComponent } from './battle-center/battle-center.component';
 import { TemplateLibraryComponent } from './template-library/template-library.component';
+import { BattleCenterService } from 'app/battle-center.service';
+import { TemplateLibraryService } from 'app/template-library.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { TemplateLibraryComponent } from './template-library/template-library.co
   ],
   providers: [
     BattleLibraryService,
-    AgentLibraryService
+    AgentLibraryService,
+    TemplateLibraryService,
+    BattleCenterService
   ],
   bootstrap: [AppComponent]
 })

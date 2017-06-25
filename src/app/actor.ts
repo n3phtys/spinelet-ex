@@ -1,7 +1,7 @@
 import { Template } from 'app/template';
 import { CustomCondition } from 'app/custom-condition';
 import { AgentType } from 'app/agent-type.enum';
-import { Woundable } from "app/woundable";
+import { Woundable } from 'app/woundable';
 
 export class Actor  implements Woundable {
     public woundpenalty: number;

@@ -1,3 +1,153 @@
 <p>
   template-library works!
 </p>
+
+<div>
+<div *ngFor="let template of templateLibraryService.persistentArray; let idx = index">
+  <button (click)="switchTo(idx)">
+    {{template.title}}</button>
+</div>
+
+ 
+
+<div *ngIf="selectedTemplate">
+
+
+
+
+      <form class="form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Title:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" name="title" [(ngModel)]="selectedTemplate.title" id="email" required placeholder="Enter title">
+    </div>
+  </div>
+
+
+      <div class="form-group">
+  <label class="control-label col-sm-2"  for="typeselect">Select Type of selectedTemplate:</label>
+    <div class="col-sm-10">
+        <select class="form-control" id="typeselect" name="selectedTemplatetype" [(ngModel)]="selectedTemplate.type">
+     <option *ngFor="let item of types | enumPipe" [value]="item.key">{{item.value}}</option>
+  </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="avatarurl">Avatar URL:</label>
+    <div class="col-sm-7"> 
+      <input type="url" class="form-control" [(ngModel)]="selectedTemplate.avatarUrl" (change)="rerenderImage()" name="avatarurl"  id="avatarurl" placeholder="Enter url">
+      
+    </div>
+    <div class="col-sm-3 profilepic large" [ngStyle]="{'background-image': renderImage}" >
+       </div>
+  </div>
+  <div class="form-group">
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Description:</label>
+    <div class="col-sm-10">
+      <textarea type="email" class="form-control" [(ngModel)]="selectedTemplate.description" name="description"  id="email" placeholder="Enter title"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Soak:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="soak" [(ngModel)]="selectedTemplate.soak"  placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Hardness:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="hardness" [(ngModel)]="selectedTemplate.hardness"  placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Evasion:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="evasionDV" [(ngModel)]="selectedTemplate.evasionDV"  placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Parry:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="parryDV" [(ngModel)]="selectedTemplate.hpWPZero"  placeholder="Enter title">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">-0 Health Points:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="hpWPZero" [(ngModel)]="selectedTemplate.hpWPZero"  placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group"  *ngIf="selectedTemplate.type!=1">
+    <label class="control-label col-sm-2" for="email">-1 Health Points:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="hpWPOne" [(ngModel)]="selectedTemplate.hpWPOne"  placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group"  *ngIf="selectedTemplate.type!=1">
+    <label class="control-label col-sm-2" for="email">-2 Health Points:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="hpWPTwo" [(ngModel)]="selectedTemplate.hpWPTwo" placeholder="Enter title">
+    </div>
+  </div>
+  <div class="form-group"  *ngIf="selectedTemplate.type!=1">
+    <label class="control-label col-sm-2" for="email">-4 Health Points:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="hpWPFour" [(ngModel)]="selectedTemplate.hpWPFour"  placeholder="Enter title">
+    </div>
+    
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Info on Health:</label>
+    <div class="col-sm-10">
+      <p class="form-control-static">Every selectedTemplate also has an additional, implicit 'Inc.' health point.</p>
+    </div>
+  </div>
+
+
+
+  <div class="form-group"  *ngIf="selectedTemplate.type==1">
+    <label class="control-label col-sm-2" for="email">Size:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="size" [(ngModel)]="selectedTemplate.size"  placeholder="Enter Size of Battlegroup">
+    </div>
+  </div>
+
+
+      <div class="form-group" *ngIf="selectedTemplate.type==1">
+  <label class="control-label col-sm-2"  for="drillselect">Select Drill of Battlegroup:</label>
+    <div class="col-sm-10">
+        <select class="form-control" id="drillselect" name="drill" [(ngModel)]="selectedTemplate.drill">
+     <option *ngFor="let item of drills | enumPipe" [value]="item.key">{{item.value}}</option>
+  </select>
+    </div>
+  </div>
+
+  <div class="form-group"  *ngIf="selectedTemplate.type==1">
+    <label class="control-label col-sm-2" for="email">Might:</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="email" name="might" [(ngModel)]="selectedTemplate.might" placeholder="Enter Might of Battlegroup">
+    </div>
+  </div>
+  
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+
+    <button type="button" (click)="clear()" class="btn btn-danger">Clear / Revert</button>
+    <button type="button" [disabled]="selectedTemplate.title == null || selectedTemplate.title.length == 0" (click)="storeInLibrary()" class="btn btn-info">Save selectedTemplate to Template Library</button>
+    <button type="submit" [disabled]="selectedTemplate.title == null || selectedTemplate.title.length == 0" (click)="addToBattle()" class="btn btn-primary">Add selectedTemplate to Battle</button>
+    </div>
+  </div>
+</form>
+
+
+    
+
+    </div>
+    
+
+
+</div>
