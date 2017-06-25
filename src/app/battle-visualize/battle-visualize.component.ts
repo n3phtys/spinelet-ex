@@ -28,6 +28,13 @@ export class BattleVisualizeComponent implements OnInit {
     this.resort();
   }
 
+  addedAgent(agent: Agent) {
+    console.log("Adding to battle:");
+    console.log(agent);
+    this.battleLibraryService.getOpenBattle().actors.push(agent);
+    this.resort();
+  }
+
   resort() {
     // TODO: implement better
 
